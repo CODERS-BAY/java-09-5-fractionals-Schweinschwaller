@@ -50,64 +50,8 @@ public class Fractional {
                 return true;
             } else if (this.numerator == help.getNumerator() && this.denominator == help.getDenominator()) {
                 return true;
-            }
-
-            //make the fraction help smaller
-            while (help.getNumerator() > 1 && help.getDenominator() > 1) {
-                if (help.getDenominator() % help.getNumerator() == 0) {
-                    help.denominator /= help.getNumerator();
-                    help.numerator /= help.getNumerator();
-                    if (this.numerator == help.getNumerator() && this.denominator == help.getDenominator()) {
-                        return true;
-                    }
-                } else {
-                    //make this fraction smaller with 2
-                    if (help.getDenominator() % 2 == 0 && help.getNumerator() % 2 == 0) {
-                        help.denominator /= 2;
-                        help.numerator /= 2;
-                        if (this.numerator == help.getNumerator() && this.denominator == help.getDenominator()) {
-                            return true;
-                        }
-                        //make this fraction smaller with 3
-                    } else if (help.getDenominator() % 3 == 0 && help.getNumerator() % 3 == 0) {
-                        help.denominator /= 3;
-                        help.numerator /= 3;
-                        if (this.numerator == help.getNumerator() && this.denominator == help.getDenominator()) {
-                            return true;
-                        }
-                    } else {
-                        break;
-                    }
-                }
-            }
-
-            //make this fraction smaller
-            while (this.getNumerator() > 1 && this.getDenominator() > 1) {
-                if (this.getDenominator() % this.getNumerator() == 0) {
-                    this.denominator /= this.getNumerator();
-                    this.numerator /= this.getNumerator();
-                    if (this.numerator == help.getNumerator() && this.denominator == help.getDenominator()) {
-                        return true;
-                    }
-                } else {
-                    //make this fraction smaller with 2
-                    if (this.getDenominator() % 2 == 0 && this.getNumerator() % 2 == 0) {
-                        this.denominator /= 2;
-                        this.numerator /= 2;
-                        if (this.numerator == help.getNumerator() && this.denominator == help.getDenominator()) {
-                            return true;
-                        }
-                        //make this fraction smaller with 3
-                    } else if (help.getDenominator() % 3 == 0 && this.getNumerator() % 3 == 0) {
-                        this.denominator /= 3;
-                        this.numerator /= 3;
-                        if (this.numerator == help.getNumerator() && this.denominator == help.getDenominator()) {
-                            return true;
-                        }
-                    } else {
-                        break;
-                    }
-                }
+            } else if (this.numerator * help.getDenominator() == this.denominator * help.getNumerator()) {
+                return true;
             }
         }
         return false;
