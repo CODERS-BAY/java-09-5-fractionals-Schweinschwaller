@@ -5,70 +5,88 @@ package at.codersbay.datastructures;
  * e.g.: 1/2, 1/3, 24/37, ..
  */
 public class Fractional {
+    private Integer numerator;
+    private Integer denominator;
 
     public Fractional(Integer numerator, Integer denominator) {
-        // TODO implement to fix tests in FractionalTest1
+        if (numerator == null) {
+            throw new IllegalArgumentException("You shall not pass null!");
+        } else if (denominator == null) {
+            throw new IllegalArgumentException("You shall not pass null!");
+        } else if (denominator == 0) {
+            throw new IllegalArgumentException("You shall not divide through zero!");
+        }
+
+        this.numerator = numerator;
+        this.denominator = denominator;
     }
 
     public Integer getNumerator() {
-        // TODO implement to fix tests in FractionalTest1
-        return -1;
+        return this.numerator;
     }
 
     public Integer getDenominator() {
-        // TODO implement to fix tests in FractionalTest1
-        return -1;
+        return this.denominator;
     }
 
     public Float asFloat() {
-        // TODO implement to fix tests in FractionalTest2
-        return -1f;
+        return (float) this.numerator / this.denominator;
     }
 
     @Override
     public boolean equals(Object obj) {
-        // TODO implement to fix tests in FractionalTest3
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (obj instanceof Fractional) {
+            // convert Object to Fractional
+            Fractional help = (Fractional) obj;
+
+            // 0/x = 0 --> 0/x == 0/y | x != y
+            if (this.numerator == 0 && help.getNumerator() == 0) {
+                return true;
+            } else if (this.numerator == help.getNumerator() && this.denominator == help.getDenominator()) {
+                return true;
+            } else if (this.numerator * help.getDenominator() == this.denominator * help.getNumerator()) {
+                return true;
+            }
+        }
         return false;
     }
 
     public Fractional multiply(Fractional other) {
-        // TODO implement to fix tests in FractionalTest4
-        return new Fractional(1, 1);
+        return new Fractional(this.numerator * other.getNumerator(), this.denominator * other.denominator);
     }
 
     public Fractional multiply(Integer other) {
-        // TODO implement to fix tests in FractionalTest4
-        return new Fractional(1, 1);
+        return new Fractional(this.numerator * other, this.denominator);
     }
 
     public Fractional divide(Fractional other) {
-        // TODO implement to fix tests in FractionalTest5
-        return new Fractional(1, 1);
+        return new Fractional(this.numerator * other.getDenominator(), this.denominator * other.getNumerator());
     }
 
     public Fractional divide(Integer other) {
-        // TODO implement to fix tests in FractionalTest5
-        return new Fractional(1, 1);
+        return new Fractional(this.numerator * 1, this.denominator * other);
     }
 
     public Fractional add(Fractional other) {
-        // TODO implement to fix tests in FractionalTest6
-        return new Fractional(1, 1);
+        return new Fractional((this.numerator * other.getDenominator()) + (other.getNumerator() * this.getDenominator()), this.denominator * other.getDenominator());
     }
 
     public Fractional add(Integer other) {
-        // TODO implement to fix tests in FractionalTest6
-        return new Fractional(1, 1);
+        return new Fractional(this.numerator + other * this.getDenominator(), this.denominator);
     }
 
     public Fractional subtract(Fractional other) {
-        // TODO implement to fix tests in FractionalTest7
-        return new Fractional(1, 1);
+        return new Fractional((this.numerator * other.getDenominator()) - (other.getNumerator() * this.denominator), this.denominator * other.getDenominator());
     }
 
     public Fractional subtract(Integer other) {
-        // TODO implement to fix tests in FractionalTest7
-        return new Fractional(1, 1);
+        return new Fractional(this.numerator - (other * this.denominator), this.getDenominator());
     }
 
 }
